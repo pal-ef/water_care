@@ -1,0 +1,31 @@
+{%extends 'layout.htm'%}
+{%block body%}
+
+<div class="container">
+    <div class="block mt-5">
+        <h1 class="title is-2">Editar un participante</h1>
+    </div>
+    <div class="columns mt-5">     
+        <div class="column">   
+            <form action="/update/{{participante.0}}" method="POST" class="box">
+                <div class="field">
+                <label class="label">Localización</label>
+                <div class="control">
+                    <input class="input" type="text" name= "localizacion" placeholder="e.g. Guadalajara" value="{{participante.1}}">
+                </div>
+                </div>
+            
+                <div class="field">
+                <label class="label">Correo</label>
+                <div class="control">
+                    <input class="input" name="correo" type="email" placeholder="e.g. correo@direccion.com" value="{{participante.2}}">
+                </div>
+                </div>
+            
+                <button type="submit" class="button is-primary">Actualizar información</button>
+            </form>
+        </div>
+        <div class="column"></div>
+    </div>
+</div>
+{%endblock%}

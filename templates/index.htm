@@ -1,0 +1,89 @@
+{% extends 'layout.htm' %}
+
+{% block body %}
+{% with mensajes = get_flashed_messages() %}
+{% if mensajes %}
+{% for mensaje in mensajes %}
+<article class="block message is-success">
+    <div class="message-header">
+      <p>Éxito</p>
+      <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+        {{mensaje}}
+    </div>
+  </article>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<!--
+<form action="/registrar" method="POST">
+    <input type="text" name="localizacion" placeholder="localización">
+    <input type="text" name="correo" placeholder="Correo">
+    <button type="submit">registrar</button>
+</form>
+-->
+<div class="container">
+    <div class="block mt-5">
+        <h1 class="title is-2">Agregar a un participante</h1>
+    </div>
+    <div class="columns mt-5">     
+        <div class="column mr-6">   
+            <form action="/registrar" method="POST" class="box">
+                <div class="field">
+                <label class="label">Localización</label>
+                <div class="control">
+                    <input class="input" type="text" name= "localizacion" placeholder="e.g. Guadalajara">
+                </div>
+                </div>
+            
+                <div class="field">
+                <label class="label">Correo</label>
+                <div class="control">
+                    <input class="input" name="correo" type="email" placeholder="e.g. correo@direccion.com">
+                </div>
+                </div>
+            
+                <button type="submit" class="button is-link">Registrar</button>
+            </form>
+        </div>
+        <div class="column is-two-thirds ml-6">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr class="is-selected has-background-link has-text-weight-semibold">
+                        <td>Localización: </td>
+                        <td>Correo Electrónico: </td>
+                        <td>Operaciones: </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for participante in participantes %}
+                        <tr>
+                            <td>{{ participante.1 }}</td>
+                            <td>{{ participante.2 }}</td>
+                            <td>
+                                <div class="field is-grouped buttons">
+                                    <p class="control">
+                                        <a href="/edit/{{participante.0}}">
+                                            <button class="button is-warning is-small">
+                                            Editar
+                                            </button>
+                                        </a>
+                                    </p>
+                                    <a href="/delete/{{participante.0}}">
+                                        <p class="control">
+                                            <button class="button is-danger is-small">
+                                            Eliminar
+                                            </button>
+                                        </p>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
